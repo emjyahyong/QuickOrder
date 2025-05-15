@@ -7,39 +7,25 @@ import java.io.Serializable;
 @Entity
 @Table(name = "client")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Client implements Serializable {
+public class Client extends Utilisateur implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id",nullable = false)
-    private Long id;
     private String nom;
     private String prenom;
     private String adresse;
     private String ville;
     private String codePostal;
     private Integer telephone;
-    private String email;
 
     public Client() {}
 
-    public Client(Long id, String nom, String prenom, String adresse, String ville, String codePostal, Integer telephone, String email) {
-        this.id = id;
+    public Client(Long id, String email, String motDePasse, String nom, String prenom, String adresse, String ville, String codePostal, Integer telephone) {
+        super(id, email, motDePasse);
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.ville = ville;
         this.codePostal = codePostal;
         this.telephone = telephone;
-        this.email = email;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNom() {
@@ -88,13 +74,5 @@ public class Client implements Serializable {
 
     public void setTelephone(Integer telephone) {
         this.telephone = telephone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 }
